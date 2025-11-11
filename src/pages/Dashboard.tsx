@@ -62,6 +62,7 @@ const Dashboard = () => {
       url: "https://youthmentalwellnessai.streamlit.app/",
       icon: Brain,
       gradient: "from-purple-500 to-purple-700",
+      external: true,
     },
     {
       id: 2,
@@ -70,14 +71,16 @@ const Dashboard = () => {
       url: "#",
       icon: Heart,
       gradient: "from-pink-500 to-pink-700",
+      external: false,
     },
     {
       id: 3,
       title: "Module 3",
-      description: "Coming soon - Advanced support tools",
-      url: "#",
+      description: "Wellness Exercises & Therapies - Yoga, meditation, and healing practices",
+      url: "/wellness",
       icon: Sparkles,
       gradient: "from-indigo-500 to-indigo-700",
+      external: false,
     },
   ];
 
@@ -145,12 +148,16 @@ const Dashboard = () => {
                       className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 group/btn"
                       onClick={() => {
                         if (module.url !== "#") {
-                          window.open(module.url, "_blank", "noopener,noreferrer");
+                          if (module.external) {
+                            window.open(module.url, "_blank", "noopener,noreferrer");
+                          } else {
+                            navigate(module.url);
+                          }
                         }
                       }}
                       disabled={module.url === "#"}
                     >
-                      {module.url === "#" ? "Coming Soon" : "Access Module"}
+                      {module.url === "#" ? "Coming Soon" : module.external ? "Access Module" : "Open Module"}
                       {module.url !== "#" && (
                         <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       )}
