@@ -43,7 +43,7 @@ const Dashboard = () => {
       toast({
         variant: "destructive",
         title: "Error signing out",
-        description: error.message,
+        description: "Unable to sign out. Please try again.",
       });
     } else {
       toast({
