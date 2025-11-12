@@ -68,10 +68,10 @@ const Dashboard = () => {
       id: 2,
       title: "MindCheck 🧭",
       description: "Measure your mood and mental clarity",
-      url: "#",
+      url: "https://mentalhealthquiz-eta.vercel.app/",
       icon: Heart,
       gradient: "from-pink-500 to-pink-700",
-      external: false,
+      external: true,
     },
     {
       id: 3,
