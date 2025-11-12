@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Heart, Brain, Activity, Sparkles } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 import backPainImage from "@/assets/yoga-back-pain.jpg";
 import kneePainImage from "@/assets/yoga-knee-exercise.jpg";
@@ -220,6 +221,22 @@ const WellnessExercises = () => {
   const navigate = useNavigate();
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [filter, setFilter] = useState<string>("All");
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        navigate("/auth");
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        navigate("/auth");
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
 
   const categories = ["All", "Yoga", "Therapy", "Meditation", "Breathing Exercise", "Exercise"];
   const problems = ["All", "Back Pain", "Knee Strengthening", "Headache Relief", "Mental Wellness", "Anxiety & Stress", "Overall Stress Relief"];
