@@ -57,8 +57,8 @@ const Dashboard = () => {
   const modules = [
     {
       id: 1,
-      title: "Module 1: MindMate 🤖",
-      description: "Youth Mental Wellness AI - Interactive support and resources",
+      title: "MindMate 🤖",
+      description: "A safe space to express yourself",
       url: "https://youthmentalwellnessai.streamlit.app/",
       icon: Brain,
       gradient: "from-purple-500 to-purple-700",
@@ -66,8 +66,8 @@ const Dashboard = () => {
     },
     {
       id: 2,
-      title: "Module 2: MindCheck 🧭",
-      description: "Coming soon - Additional wellness resources",
+      title: "MindCheck 🧭",
+      description: "Measure your mood and mental clarity",
       url: "#",
       icon: Heart,
       gradient: "from-pink-500 to-pink-700",
@@ -75,8 +75,8 @@ const Dashboard = () => {
     },
     {
       id: 3,
-      title: "Module 3: Wellness Studio🌿",
-      description: "Wellness Exercises & Therapies - Yoga, meditation, and healing practices",
+      title: "Wellness Studio🌿",
+      description: "Relax, breathe, and grow stronger",
       url: "/wellness",
       icon: Sparkles,
       gradient: "from-indigo-500 to-indigo-700",
@@ -84,8 +84,8 @@ const Dashboard = () => {
     },
     {
       id: 4,
-      title: "Module 4: BrainPlay🎯",
-      description: "Memory games and mindfulness exercises to boost focus and concentration",
+      title: "BrainPlay🎯",
+      description: "Flex your focus power",
       url: "/brainplay",
       icon: Brain,
       gradient: "from-emerald-500 to-emerald-700",
