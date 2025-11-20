@@ -98,19 +98,14 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-accent">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/10 blur-3xl animate-float" />
-        <div className="absolute top-1/2 left-1/4 h-60 w-60 rounded-full bg-primary-glow/10 blur-3xl animate-float" style={{ animationDelay: "3s" }} />
-        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-primary-glow/10 blur-3xl animate-float" style={{ animationDelay: "1s" }} />
-      </div>
+    <div className="relative min-h-screen overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,hsl(var(--accent))_0%,transparent_50%)]" />
 
-      <div className="relative p-8">
-        <div className="mx-auto max-w-7xl animate-fade-in">
-          <div className="mb-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="relative p-6 md:p-12">
+        <div className="mx-auto max-w-6xl animate-fade-in">
+          <div className="mb-8 md:mb-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-2">
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
                 Mental Youth Wellness
               </h1>
               <p className="text-lg text-muted-foreground">
@@ -120,7 +115,7 @@ const Dashboard = () => {
             <Button 
               variant="outline" 
               onClick={handleSignOut}
-              className="border-2 hover:border-primary hover:text-primary transition-all duration-300"
+              className="border-2 hover:bg-accent transition-colors"
             >
               <LogOut className="mr-2 h-4 w-4" />
               Sign Out
@@ -133,28 +128,28 @@ const Dashboard = () => {
               return (
                 <Card 
                   key={module.id} 
-                  className="group relative overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-500 border-border/50 backdrop-blur animate-scale-in flex flex-col"
-                  style={{ animationDelay: `${index * 150}ms` }}
+                  className="group relative overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 border-2 flex flex-col animate-scale-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${module.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-                  
-                  <CardHeader className="relative">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className={`p-3 rounded-lg bg-gradient-to-br ${module.gradient} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className="h-6 w-6" />
+                  <CardHeader className="relative pb-4">
+                    <div className="flex items-start gap-4">
+                      <div className={`flex-shrink-0 p-3 rounded-xl bg-gradient-to-br ${module.gradient} text-white shadow-sm`}>
+                        <Icon className="h-7 w-7" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <CardTitle className="text-2xl mb-2 group-hover:text-primary transition-colors">
+                          {module.title}
+                        </CardTitle>
+                        <CardDescription className="text-base leading-relaxed">
+                          {module.description}
+                        </CardDescription>
                       </div>
                     </div>
-                    <CardTitle className="text-2xl group-hover:text-primary transition-colors duration-300">
-                      {module.title}
-                    </CardTitle>
-                    <CardDescription className="text-base leading-relaxed">
-                      {module.description}
-                    </CardDescription>
                   </CardHeader>
                   
-                  <CardContent className="mt-auto relative">
+                  <CardContent className="pt-0 relative">
                     <Button
-                      className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 group/btn"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-colors font-medium"
                       onClick={() => {
                         if (module.url !== "#") {
                           if (module.external) {
@@ -168,7 +163,7 @@ const Dashboard = () => {
                     >
                       {module.url === "#" ? "Coming Soon" : module.external ? "Access Module" : "Open Module"}
                       {module.url !== "#" && (
-                        <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                        <ExternalLink className="ml-2 h-4 w-4" />
                       )}
                     </Button>
                   </CardContent>
