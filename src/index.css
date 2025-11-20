@@ -4,70 +4,70 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 15% 15%;
+    --background: 160 25% 98%;
+    --foreground: 160 15% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 220 15% 15%;
+    --card-foreground: 160 15% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 15%;
-    --primary: 260 70% 55%;
+    --popover-foreground: 160 15% 15%;
+    --primary: 168 65% 42%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 280 80% 70%;
-    --secondary: 220 15% 92%;
-    --secondary-foreground: 220 15% 15%;
-    --muted: 220 15% 95%;
-    --muted-foreground: 220 10% 45%;
-    --accent: 260 60% 95%;
-    --accent-foreground: 260 70% 55%;
+    --primary-glow: 175 55% 55%;
+    --secondary: 160 20% 94%;
+    --secondary-foreground: 160 15% 15%;
+    --muted: 160 15% 96%;
+    --muted-foreground: 160 10% 45%;
+    --accent: 168 45% 92%;
+    --accent-foreground: 168 65% 42%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 260 70% 55%;
+    --border: 160 20% 90%;
+    --input: 160 20% 90%;
+    --ring: 168 65% 42%;
     --radius: 0.75rem;
-    --chart-1: 260 70% 55%;
-    --chart-2: 280 80% 70%;
-    --chart-3: 220 15% 45%;
-    --chart-4: 240 60% 65%;
-    --chart-5: 200 70% 60%;
+    --chart-1: 168 65% 42%;
+    --chart-2: 145 55% 50%;
+    --chart-3: 35 80% 55%;
+    --chart-4: 195 65% 50%;
+    --chart-5: 340 65% 60%;
     
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
     --gradient-accent: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--accent)) 100%);
-    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.2);
-    --shadow-glow: 0 0 60px hsl(var(--primary-glow) / 0.15);
+    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.15);
+    --shadow-glow: 0 0 50px hsl(var(--primary-glow) / 0.12);
   }
 
   .dark {
-    --background: 220 20% 8%;
-    --foreground: 220 15% 95%;
-    --card: 220 18% 12%;
-    --card-foreground: 220 15% 95%;
-    --popover: 220 18% 12%;
-    --popover-foreground: 220 15% 95%;
-    --primary: 270 75% 65%;
+    --background: 160 20% 10%;
+    --foreground: 160 15% 95%;
+    --card: 160 18% 14%;
+    --card-foreground: 160 15% 95%;
+    --popover: 160 18% 14%;
+    --popover-foreground: 160 15% 95%;
+    --primary: 175 60% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 285 85% 75%;
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 220 15% 95%;
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 60%;
-    --accent: 270 60% 20%;
-    --accent-foreground: 270 75% 65%;
+    --primary-glow: 168 70% 65%;
+    --secondary: 160 15% 20%;
+    --secondary-foreground: 160 15% 95%;
+    --muted: 160 15% 18%;
+    --muted-foreground: 160 10% 65%;
+    --accent: 168 50% 22%;
+    --accent-foreground: 175 60% 55%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
-    --ring: 270 75% 65%;
-    --chart-1: 270 75% 65%;
-    --chart-2: 285 85% 75%;
-    --chart-3: 220 15% 60%;
-    --chart-4: 250 65% 70%;
-    --chart-5: 210 75% 65%;
+    --border: 160 15% 22%;
+    --input: 160 15% 22%;
+    --ring: 175 60% 55%;
+    --chart-1: 175 60% 55%;
+    --chart-2: 145 55% 60%;
+    --chart-3: 35 75% 60%;
+    --chart-4: 195 60% 55%;
+    --chart-5: 340 60% 65%;
     
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
     --gradient-accent: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--accent)) 100%);
-    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.3);
-    --shadow-glow: 0 0 60px hsl(var(--primary-glow) / 0.2);
+    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.25);
+    --shadow-glow: 0 0 50px hsl(var(--primary-glow) / 0.18);
   }
 }
 
