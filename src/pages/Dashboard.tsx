@@ -127,7 +127,7 @@ const Dashboard = () => {
             </Button>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="flex flex-col gap-6 max-w-2xl mx-auto">
             {modules.map((module, index) => {
               const Icon = module.icon;
               return (
