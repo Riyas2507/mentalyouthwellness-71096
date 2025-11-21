@@ -38,8 +38,6 @@ const MindCheck = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
-  const [aiAnalysis, setAiAnalysis] = useState<string>("");
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -61,41 +59,14 @@ const MindCheck = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const handleAnswer = async (answer: string) => {
+  const handleAnswer = (answer: string) => {
     const newAnswers = [...answers, answer];
     setAnswers(newAnswers);
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // All questions answered, get AI analysis
-      setIsAnalyzing(true);
-      try {
-        const { data, error } = await supabase.functions.invoke('analyze-mental-health', {
-          body: { questions, answers: newAnswers }
-        });
-
-        if (error) {
-          console.error('Error getting AI analysis:', error);
-          toast({
-            title: "Analysis Error",
-            description: "Could not complete AI analysis. Showing basic results.",
-            variant: "destructive"
-          });
-        } else if (data?.analysis) {
-          setAiAnalysis(data.analysis);
-        }
-      } catch (error) {
-        console.error('Error calling analysis function:', error);
-        toast({
-          title: "Analysis Error",
-          description: "Could not complete AI analysis. Showing basic results.",
-          variant: "destructive"
-        });
-      } finally {
-        setIsAnalyzing(false);
-        setShowResults(true);
-      }
+      setShowResults(true);
     }
   };
 
@@ -109,26 +80,34 @@ const MindCheck = () => {
     if (score >= 0 && score <= 15) {
       return {
         title: "Minimal Mental Health Concerns",
+        emoji: "😊",
         description: "You appear to be managing well emotionally and mentally. Continue practicing self-care and maintaining healthy habits.",
-        color: "text-emerald-600"
+        color: "text-emerald-600",
+        showMindMate: false
       };
     } else if (score >= 16 && score <= 30) {
       return {
         title: "Mild Mental Health Concerns",
+        emoji: "😐",
         description: "You may be experiencing some stress or emotional difficulties. Consider talking to someone you trust or exploring relaxation techniques.",
-        color: "text-yellow-600"
+        color: "text-yellow-600",
+        showMindMate: true
       };
     } else if (score >= 31 && score <= 45) {
       return {
         title: "Moderate Mental Health Concerns",
+        emoji: "😟",
         description: "Your responses suggest you may benefit from professional support. Consider reaching out to a counselor or therapist.",
-        color: "text-orange-600"
+        color: "text-orange-600",
+        showMindMate: true
       };
     } else {
       return {
         title: "Significant Mental Health Concerns",
+        emoji: "😢",
         description: "Your responses indicate you may be experiencing significant mental health challenges. Please seek professional help from a mental health provider as soon as possible.",
-        color: "text-red-600"
+        color: "text-red-600",
+        showMindMate: true
       };
     }
   };
@@ -137,7 +116,6 @@ const MindCheck = () => {
     setCurrentQuestion(0);
     setAnswers([]);
     setShowResults(false);
-    setAiAnalysis("");
   };
 
   const getChartData = () => {
@@ -222,102 +200,91 @@ const MindCheck = () => {
                 <div className="flex items-center justify-center mb-4">
                   <CheckCircle2 className="h-16 w-16 text-primary" />
                 </div>
-                <CardTitle className="text-3xl text-center">
-                  {isAnalyzing ? "Analyzing Your Responses..." : "Analysis Complete!"}
-                </CardTitle>
+                <CardTitle className="text-3xl text-center">Quiz Complete!</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                {isAnalyzing ? (
-                  <div className="text-center py-12 space-y-4">
-                    <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
-                    <p className="text-muted-foreground">Using ML to analyze your mental health patterns...</p>
-                  </div>
-                ) : (
-                  <>
-                    {/* Response Distribution Chart */}
-                    <div className="p-6 rounded-lg bg-muted/50 space-y-4">
-                      <h3 className="text-xl font-bold text-foreground">
-                        Your Response Distribution
-                      </h3>
-                      <ResponsiveContainer width="100%" height={250}>
-                        <BarChart data={getChartData()}>
-                          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                          <XAxis 
-                            dataKey="name" 
-                            stroke="hsl(var(--foreground))"
-                            tick={{ fill: "hsl(var(--foreground))" }}
-                          />
-                          <YAxis 
-                            stroke="hsl(var(--foreground))"
-                            tick={{ fill: "hsl(var(--foreground))" }}
-                          />
-                          <Tooltip 
-                            contentStyle={{ 
-                              backgroundColor: "hsl(var(--popover))",
-                              border: "1px solid hsl(var(--border))",
-                              borderRadius: "0.5rem",
-                              color: "hsl(var(--foreground))"
-                            }}
-                          />
-                          <Bar dataKey="count" radius={[8, 8, 0, 0]}>
-                            {getChartData().map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={entry.color} />
-                            ))}
-                          </Bar>
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
+                {/* Response Distribution Chart */}
+                <div className="p-6 rounded-lg bg-muted/50 space-y-4">
+                  <h3 className="text-xl font-bold text-foreground">
+                    Your Response Distribution
+                  </h3>
+                  <ResponsiveContainer width="100%" height={250}>
+                    <BarChart data={getChartData()}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                      <XAxis 
+                        dataKey="name" 
+                        stroke="hsl(var(--foreground))"
+                        tick={{ fill: "hsl(var(--foreground))" }}
+                      />
+                      <YAxis 
+                        stroke="hsl(var(--foreground))"
+                        tick={{ fill: "hsl(var(--foreground))" }}
+                      />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: "hsl(var(--popover))",
+                          border: "1px solid hsl(var(--border))",
+                          borderRadius: "0.5rem",
+                          color: "hsl(var(--foreground))"
+                        }}
+                      />
+                      <Bar dataKey="count" radius={[8, 8, 0, 0]}>
+                        {getChartData().map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
 
-                    {aiAnalysis ? (
-                      <div className="p-6 rounded-lg bg-muted/50 space-y-4">
-                        <h3 className="text-2xl font-bold text-primary mb-4">
-                          AI-Powered Analysis
-                        </h3>
-                        <div className="prose prose-sm max-w-none text-foreground whitespace-pre-wrap leading-relaxed">
-                          {aiAnalysis}
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="text-center space-y-4">
-                          <p className="text-5xl font-bold text-primary">{score}</p>
-                          <p className="text-lg text-muted-foreground">out of 60 points</p>
-                        </div>
+                <div className="text-center space-y-4">
+                  <p className="text-6xl">{result.emoji}</p>
+                  <p className="text-5xl font-bold text-primary">{score}</p>
+                  <p className="text-lg text-muted-foreground">out of 60 points</p>
+                </div>
 
-                        <div className="p-6 rounded-lg bg-muted/50 space-y-3">
-                          <h3 className={`text-2xl font-bold ${result.color}`}>
-                            {result.title}
-                          </h3>
-                          <p className="text-base text-foreground leading-relaxed">
-                            {result.description}
-                          </p>
-                        </div>
-                      </>
+                <div className="p-6 rounded-lg bg-muted/50 space-y-3">
+                  <h3 className={`text-2xl font-bold ${result.color}`}>
+                    {result.title}
+                  </h3>
+                  <p className="text-base text-foreground leading-relaxed">
+                    {result.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 space-y-3">
+                  <p className="text-sm text-muted-foreground italic">
+                    * This assessment is not a diagnostic tool. If you're concerned about your mental health, please consult with a qualified healthcare professional.
+                  </p>
+                  
+                  <div className="flex flex-col gap-3">
+                    {result.showMindMate && (
+                      <Button
+                        onClick={() => window.open("https://mind-mate-gpt.vercel.app/", "_blank")}
+                        className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
+                      >
+                        💬 Chat with MindMate AI
+                      </Button>
                     )}
-
-                    <div className="pt-4 space-y-3">
-                      <p className="text-sm text-muted-foreground italic">
-                        * This AI-powered assessment uses machine learning for analysis but is not a diagnostic tool. If you're concerned about your mental health, please consult with a qualified healthcare professional.
-                      </p>
-                      
-                      <div className="flex gap-4">
-                        <Button
-                          onClick={resetQuiz}
-                          className="flex-1 bg-gradient-primary hover:shadow-glow transition-all duration-300"
-                        >
-                          Take Quiz Again
-                        </Button>
-                        <Button
-                          onClick={() => navigate("/dashboard")}
-                          variant="outline"
-                          className="flex-1 border-2 hover:border-primary hover:text-primary transition-all duration-300"
-                        >
-                          Back to Dashboard
-                        </Button>
-                      </div>
+                    
+                    <div className="flex gap-4">
+                      <Button
+                        onClick={resetQuiz}
+                        variant="outline"
+                        className="flex-1 border-2 hover:border-primary hover:text-primary transition-all duration-300"
+                      >
+                        Take Quiz Again
+                      </Button>
+                      <Button
+                        onClick={() => navigate("/dashboard")}
+                        variant="outline"
+                        className="flex-1 border-2 hover:border-primary hover:text-primary transition-all duration-300"
+                      >
+                        Back to Dashboard
+                      </Button>
                     </div>
-                  </>
-                )}
+                  </div>
+                </div>
               </CardContent>
             </Card>
           )}
