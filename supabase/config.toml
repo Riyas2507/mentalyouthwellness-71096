@@ -1,1 +1,4 @@
 project_id = "doysorzxrgyuzraypzdf"
+
+[functions.analyze-mental-health]
+verify_jwt = false
