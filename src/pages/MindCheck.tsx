@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 const questions = [
   "I often feel stressed or overwhelmed by my daily responsibilities.",
@@ -139,6 +140,22 @@ const MindCheck = () => {
     setAiAnalysis("");
   };
 
+  const getChartData = () => {
+    const counts = { Always: 0, Often: 0, Sometimes: 0, Never: 0 };
+    answers.forEach(answer => {
+      if (answer in counts) {
+        counts[answer as keyof typeof counts]++;
+      }
+    });
+    
+    return [
+      { name: "Always", count: counts.Always, color: "hsl(var(--destructive))" },
+      { name: "Often", count: counts.Often, color: "hsl(var(--chart-4))" },
+      { name: "Sometimes", count: counts.Sometimes, color: "hsl(var(--chart-2))" },
+      { name: "Never", count: counts.Never, color: "hsl(var(--primary))" },
+    ];
+  };
+
   if (!user) {
     return null;
   }
@@ -217,6 +234,40 @@ const MindCheck = () => {
                   </div>
                 ) : (
                   <>
+                    {/* Response Distribution Chart */}
+                    <div className="p-6 rounded-lg bg-muted/50 space-y-4">
+                      <h3 className="text-xl font-bold text-foreground">
+                        Your Response Distribution
+                      </h3>
+                      <ResponsiveContainer width="100%" height={250}>
+                        <BarChart data={getChartData()}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                          <XAxis 
+                            dataKey="name" 
+                            stroke="hsl(var(--foreground))"
+                            tick={{ fill: "hsl(var(--foreground))" }}
+                          />
+                          <YAxis 
+                            stroke="hsl(var(--foreground))"
+                            tick={{ fill: "hsl(var(--foreground))" }}
+                          />
+                          <Tooltip 
+                            contentStyle={{ 
+                              backgroundColor: "hsl(var(--popover))",
+                              border: "1px solid hsl(var(--border))",
+                              borderRadius: "0.5rem",
+                              color: "hsl(var(--foreground))"
+                            }}
+                          />
+                          <Bar dataKey="count" radius={[8, 8, 0, 0]}>
+                            {getChartData().map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color} />
+                            ))}
+                          </Bar>
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+
                     {aiAnalysis ? (
                       <div className="p-6 rounded-lg bg-muted/50 space-y-4">
                         <h3 className="text-2xl font-bold text-primary mb-4">
