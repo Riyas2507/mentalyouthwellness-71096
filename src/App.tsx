@@ -10,6 +10,7 @@ import WellnessExercises from "./pages/WellnessExercises";
 import BrainPlay from "./pages/BrainPlay";
 import MindCheck from "./pages/MindCheck";
 import NotFound from "./pages/NotFound";
+import { MindMateAssistant } from "./components/MindMateAssistant";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <MindMateAssistant />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
