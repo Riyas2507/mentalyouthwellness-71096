@@ -80,13 +80,29 @@ export const MindMateAI = () => {
     setIsSpeaking(true);
 
     try {
+      // Get the user's session token
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session) {
+        toast({
+          title: "Authentication required",
+          description: "Please sign in to use MindMate AI.",
+          variant: "destructive",
+        });
+        setMessages(prev => prev.slice(0, -1));
+        setIsLoading(false);
+        setIsSpeaking(false);
+        return;
+      }
+
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mindmate-chat`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+            Authorization: `Bearer ${session.access_token}`,
           },
           body: JSON.stringify({ messages: [...messages, userMessage] }),
         }

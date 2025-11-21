@@ -1,3 +1,4 @@
+import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
@@ -12,6 +13,74 @@ serve(async (req) => {
 
   try {
     const { questions, answers } = await req.json();
+    
+    // Input validation
+    if (!Array.isArray(questions) || !Array.isArray(answers)) {
+      return new Response(
+        JSON.stringify({ error: "Questions and answers must be arrays" }), 
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (questions.length === 0 || answers.length === 0) {
+      return new Response(
+        JSON.stringify({ error: "Questions and answers cannot be empty" }), 
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (questions.length !== answers.length) {
+      return new Response(
+        JSON.stringify({ error: "Number of questions and answers must match" }), 
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (questions.length > 50) {
+      return new Response(
+        JSON.stringify({ error: "Too many questions. Maximum 50 allowed." }), 
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // Validate each question and answer
+    for (let i = 0; i < questions.length; i++) {
+      const question = questions[i];
+      const answer = answers[i];
+
+      if (typeof question !== 'string' || question.length > 500) {
+        return new Response(
+          JSON.stringify({ error: `Question ${i + 1} must be a string under 500 characters` }), 
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      if (typeof answer !== 'string' || answer.length > 1000) {
+        return new Response(
+          JSON.stringify({ error: `Answer ${i + 1} must be a string under 1000 characters` }), 
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+    }
+    
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
