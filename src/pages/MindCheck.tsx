@@ -258,15 +258,6 @@ const MindCheck = () => {
                   </p>
                   
                   <div className="flex flex-col gap-3">
-                    {result.showMindMate && (
-                      <Button
-                        onClick={() => window.open("http://youthmentalwellnessai.streamlit.app/", "_blank")}
-                        className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
-                      >
-                        💬 Chat with MindMate AI
-                      </Button>
-                    )}
-                    
                     <div className="flex gap-4">
                       <Button
                         onClick={resetQuiz}

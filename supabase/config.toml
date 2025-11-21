@@ -2,3 +2,6 @@ project_id = "doysorzxrgyuzraypzdf"
 
 [functions.analyze-mental-health]
 verify_jwt = false
+
+[functions.mindmate-chat]
+verify_jwt = false
