@@ -57,15 +57,6 @@ const Dashboard = () => {
   const modules = [
     {
       id: 1,
-      title: "MindMate AI 🤖",
-      description: "Your personal AI companion for mental wellness. Share your thoughts, feelings, and concerns in a judgment-free space. Get personalized support and guidance whenever you need it.",
-      url: "/mindmate",
-      icon: Brain,
-      gradient: "from-teal-500 to-cyan-600",
-      external: false,
-    },
-    {
-      id: 2,
       title: "MindCheck 🧭",
       description: "Take a moment to understand your mental state. Complete our 20-question assessment to gain insights into your emotional wellbeing and track your progress over time.",
       url: "/mindcheck",
@@ -74,7 +65,7 @@ const Dashboard = () => {
       external: false,
     },
     {
-      id: 3,
+      id: 2,
       title: "Wellness Studio 🌿",
       description: "Find your inner peace with guided exercises. Explore yoga poses, meditation practices, and breathing techniques designed to reduce stress and improve your overall wellbeing.",
       url: "/wellness",
@@ -83,7 +74,7 @@ const Dashboard = () => {
       external: false,
     },
     {
-      id: 4,
+      id: 3,
       title: "BrainPlay 🎯",
       description: "Sharpen your mind through engaging activities. Challenge yourself with memory games and focus exercises that build cognitive strength while having fun.",
       url: "/brainplay",
