@@ -82,32 +82,28 @@ const MindCheck = () => {
         title: "Minimal Mental Health Concerns",
         emoji: "😊",
         description: "You appear to be managing well emotionally and mentally. Continue practicing self-care and maintaining healthy habits.",
-        color: "text-emerald-600",
-        showMindMate: false
+        color: "text-emerald-600"
       };
     } else if (score >= 16 && score <= 30) {
       return {
         title: "Mild Mental Health Concerns",
         emoji: "😐",
         description: "You may be experiencing some stress or emotional difficulties. Consider talking to someone you trust or exploring relaxation techniques.",
-        color: "text-yellow-600",
-        showMindMate: true
+        color: "text-yellow-600"
       };
     } else if (score >= 31 && score <= 45) {
       return {
         title: "Moderate Mental Health Concerns",
         emoji: "😟",
         description: "Your responses suggest you may benefit from professional support. Consider reaching out to a counselor or therapist.",
-        color: "text-orange-600",
-        showMindMate: true
+        color: "text-orange-600"
       };
     } else {
       return {
         title: "Significant Mental Health Concerns",
         emoji: "😢",
         description: "Your responses indicate you may be experiencing significant mental health challenges. Please seek professional help from a mental health provider as soon as possible.",
-        color: "text-red-600",
-        showMindMate: true
+        color: "text-red-600"
       };
     }
   };

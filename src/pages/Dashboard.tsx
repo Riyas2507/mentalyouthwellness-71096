@@ -56,15 +56,6 @@ const Dashboard = () => {
 
   const modules = [
     {
-      id: 1,
-      title: "MindMate 🤖",
-      description: "Your personal AI companion for mental wellness. Share your thoughts, feelings, and concerns in a judgment-free space. Get personalized support and guidance whenever you need it.",
-      url: "https://youthmentalwellnessai.streamlit.app/",
-      icon: Brain,
-      gradient: "from-teal-500 to-cyan-600",
-      external: true,
-    },
-    {
       id: 2,
       title: "MindCheck 🧭",
       description: "Take a moment to understand your mental state. Complete our 20-question assessment to gain insights into your emotional wellbeing and track your progress over time.",
