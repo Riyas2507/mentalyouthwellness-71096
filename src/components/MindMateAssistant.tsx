@@ -50,7 +50,7 @@ export const MindMateAssistant = () => {
           {/* Embedded Streamlit App */}
           <div className="flex-1 relative overflow-hidden">
             <iframe
-              src="http://youthmentalwellnessai.streamlit.app/"
+              src="http://youthmentalwellnessai.streamlit.app/?embed=true&embed_options=show_toolbar:false,show_colored_line:false,show_padding:false,disable_scrolling:false"
               className="w-full h-full border-0"
               title="MindMate AI Chat"
               allow="microphone; camera"
