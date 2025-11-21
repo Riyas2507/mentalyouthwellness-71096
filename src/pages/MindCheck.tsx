@@ -260,7 +260,7 @@ const MindCheck = () => {
                   <div className="flex flex-col gap-3">
                     {result.showMindMate && (
                       <Button
-                        onClick={() => window.open("https://mind-mate-gpt.vercel.app/", "_blank")}
+                        onClick={() => window.open("http://youthmentalwellnessai.streamlit.app/", "_blank")}
                         className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
                       >
                         💬 Chat with MindMate AI
