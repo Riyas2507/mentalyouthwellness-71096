@@ -66,6 +66,15 @@ const Dashboard = () => {
     },
     {
       id: 2,
+      title: "MindMate AI 🤖",
+      description: "Your personal AI companion for mental wellness. Share your thoughts, feelings, and concerns in a judgment-free space. Get personalized support and guidance whenever you need it.",
+      url: "http://youthmentalwellnessai.streamlit.app/",
+      icon: Brain,
+      gradient: "from-teal-500 to-cyan-600",
+      external: true,
+    },
+    {
+      id: 3,
       title: "Wellness Studio 🌿",
       description: "Find your inner peace with guided exercises. Explore yoga poses, meditation practices, and breathing techniques designed to reduce stress and improve your overall wellbeing.",
       url: "/wellness",
