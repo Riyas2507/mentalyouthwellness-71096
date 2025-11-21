@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import WellnessExercises from "./pages/WellnessExercises";
 import BrainPlay from "./pages/BrainPlay";
 import MindCheck from "./pages/MindCheck";
+import MindMate from "./pages/MindMate";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
         <Route path="/wellness" element={<WellnessExercises />} />
         <Route path="/brainplay" element={<BrainPlay />} />
         <Route path="/mindcheck" element={<MindCheck />} />
+        <Route path="/mindmate" element={<MindMate />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
